@@ -263,4 +263,5 @@ console.log(signature + ' sing');
 console.log(timestamp + ' time');
 console.log(nonce + ' nonce');
 console.log(echostr+' echostr');
+}
 
