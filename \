@@ -8,18 +8,7 @@ var xml = require('node-xml');
 var appid_ = 'wx9a4bc648a1246c04';
 var secret_ ='1692347f949b03f66829f36072ebf0b0';
 var https = require('https');
-var xml2js = require("xml2js");
-var ejs = require('ejs');
 
-
-var wrapTpl = '<xml>' +
-  '<ToUserName><![CDATA[<%-to%>]]></ToUserName>' +
-  '<FromUserName><![CDATA[<%-from%>]]></FromUserName>' +
-  '<TimeStamp><%-time%></TimeStamp>' +
-  '<MsgType><![CDATA[<%-type%>]]></MsgType>' +
-  '<FuncFlag><![CDATA[<%-flag%>]]></FuncFlag>' +
-'</xml>';
-var encryptWrap = ejs.compile(wrapTpl);
 // 获取用户基本信息
 function getUserInfo(acesstk,openid_,res){
 
@@ -43,9 +32,8 @@ var req = https.request(options,function(response){
         console.log(userinfo);
 	// save userinfo
 	
-        //res.json(userinfo);
-     	//res.end("");
-//res.write('');
+        res.json(userinfo);
+//res.write('hello success ' + returnData);
     });
 });
 //如果有错误会输出错误
@@ -89,8 +77,7 @@ req.on('error', function(e){
 req.end();
 }
 exports.index = function(req, res){
-	console.log(req);
-	res.render('index', { title: 'Express' })
+  res.render('index', { title: 'Express' })
 };
 
 
@@ -101,8 +88,9 @@ exports.weixin = function(req,res){
 		// console.log(req.params.xx);
 res.json({id:req.body});
   //res.render('index', { title: 'Expresssssssss post ssssssssssssssssss'} );
-
+ 
 };
+
 
 exports.sub = function(req,res){
         console.log('post : sub----');
@@ -117,7 +105,6 @@ req.on('data', function (chunk) {
   //  jsonObj = JSON.parse(body);
 //  co//nsole.log(jsonObj.$key);
 processMessage(body,res);
-//res.end('SADFASDFLLLLLLLLLLLLLLL');
   });
 //res.json(jsonObj);
   //res.render('index', { title: 'Expresssssssss post ssssssssssssssssss'} );
@@ -200,31 +187,19 @@ var parse=new xml.SaxParser(function(cb){
             msg="你发的图片是："+PicUrl;
         }
        // messageSender.sendTextMessage(FromUserName,ToUserName,CreateTime,msg,FuncFlag,response);
-	// 分情况，subscribe,保存用户的基本信息到数据库，创建一个user表，保存openid，用户名，发送欢迎信息。
-	// 如果是text信息并且是取消那么就取消今天的订餐。
-	// 如果是event的第一个菜单信息 在今天的数据表里面创建一个订单信息
-	// 如果是显示订餐列表的event那么返回今天所有人订餐信息。以text的形式展示出来。
-
-var senddata = {};
-senddata.to= FromUserName;
-senddata.from = ToUserName;
-senddata.time = parseInt(new Date().getTime()/1000);
-senddata.type = "text";
-senddata.cont = "content is welcom " + FromUserName;
-senddata.flag = 0;
-
-var xml =encryptWrap(senddata); 
-console.log(xml);
-	res.end(xml);
-	
-//	gettk(FromUserName,res);
-       //res.end('hello formuser :'+FromUserName);
+	gettk(FromUserName,res);
+        //res.end('hello formuser :'+FromUserName);
     });
 });
-   // parse.parseString(data);
+    parse.parseString(data);
 }
 // test
 exports.test = function(req,res){
+
+	var ip = req.headers['x-forwarded-for'] ||
+        req.connection.remoteAddress ||
+        req.socket.remoteAddress ||
+        req.connection.socket.remoteAddress;
 console.log( req.query);
 console.log( ip+     'ip');
 	res.json({success: true,message:"登入成功",ip:ip,querystring:req.query});
@@ -233,9 +208,8 @@ var token = "dingcan";
 exports.checkSignature= function(req,res){
 	var echostr = req.query.echostr;
 	if(check(req)){
-		console.log(echostr);
-	//	 res.write(echostr);
-		res.end(echostr);
+		 res.write(echostr);
+		res.end();
 	}
 	return res.json({f:false});
 }
@@ -245,22 +219,26 @@ function check(req){
         var nonce = req.query.nonce;
         var echostr = req.query.echostr;
 
+
+	console.log(req.query);
+
+
+
         var arrayT = [token,timestamp,nonce];
 
 console.log(arrayT);
-	//console.log(req);
-	console.log(req.query);        
-var sortStr = arrayT.sort().join('');
-        sortStr = sha1(sortStr);
-console.log(sortStr);
-console.log(signature + ' sing');
-console.log(timestamp + ' time');
-	console.log(req.query);        
-var sortStr = arrayT.sort().join('');
+
+        var sortStr = arrayT.sort().join('');
         sortStr = sha1(sortStr);
 console.log(sortStr);
 console.log(signature + ' sing');
 console.log(timestamp + ' time');
 console.log(nonce + ' nonce');
 console.log(echostr+' echostr');
+	if(signature == sortStr){
+		return true;
+	}else{
+		return false;
+	}
 
+}

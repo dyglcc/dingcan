@@ -34,9 +34,11 @@ app.post('/weixin',routes.weixin);
 app.post('/sub',routes.sub);
 app.post('/disub',routes.dissub);
 app.get('/test',routes.test);
+app.post('/checkSignature',routes.sub)
 app.get('/checkSignature',routes.checkSignature);
 app.get('/add',routes.add);
 app.get('/gettk',routes.gettk);
+app.get('/',routes.index);
 app.listen(80, function(){
   console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 });
