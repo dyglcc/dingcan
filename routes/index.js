@@ -12,13 +12,13 @@ var xml2js = require('xml2js');
 var ejs = require('ejs');
 
 
-var wrapTpl = '<xml>' +
+var wrapTpl = ['<xml>' +
   '<ToUserName><![CDATA[<%-to%>]]></ToUserName>' +
   '<FromUserName><![CDATA[<%-from%>]]></FromUserName>' +
   '<TimeStamp><%-time%></TimeStamp>' +
   '<MsgType><![CDATA[<%-type%>]]></MsgType>' +
   '<FuncFlag><![CDATA[<%-flag%>]]></FuncFlag>' +
-'</xml>';
+'</xml>'].join('');
 var encryptWrap = ejs.compile(wrapTpl);
 // 获取用户基本信息
 function getUserInfo(acesstk,openid_,res){
