@@ -204,7 +204,7 @@ var parse=new xml.SaxParser(function(cb){
 	// 如果是text信息并且是取消那么就取消今天的订餐。
 	// 如果是event的第一个菜单信息 在今天的数据表里面创建一个订单信息
 	// 如果是显示订餐列表的event那么返回今天所有人订餐信息。以text的形式展示出来。
-
+console.log('hear!!!');
 var senddata = {};
 senddata.to= FromUserName;
 senddata.from = ToUserName;
@@ -212,9 +212,9 @@ senddata.time = parseInt(new Date().getTime()/1000);
 senddata.type = "text";
 senddata.cont = "content is welcom " + FromUserName;
 senddata.flag = 0;
-
+console.log(senddata);
 var xml =encryptWrap(senddata); 
-console.log(xml);
+console.log('xxx' + xml);
 	res.end(xml);
 	
 //	gettk(FromUserName,res);
@@ -259,9 +259,13 @@ console.log(timestamp + ' time');
 var sortStr = arrayT.sort().join('');
         sortStr = sha1(sortStr);
 console.log(sortStr);
-console.log(signature + ' sing');
-console.log(timestamp + ' time');
-console.log(nonce + ' nonce');
-console.log(echostr+' echostr');
+console.log(echostr);
+if(sortStr==signature){
+console.log("same");
+return true;
+
+}else{
+console.log('not same');
+return false;}
 }
 
