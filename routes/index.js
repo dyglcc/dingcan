@@ -222,6 +222,7 @@ function processMessage(data,res){
     console.log('messageType' + body.MsgType);
 
 
+    var content = body.Content;
     var type = body.MsgType;
     var eventtype = body.Event;
     // var clickkey = '';
@@ -249,7 +250,6 @@ function processMessage(data,res){
         }
 
     }else if(type =="text"){
-        var content = body.Content;
         console.log('get text content  ' + content);
     }
 
@@ -291,7 +291,7 @@ function processMessage(data,res){
     ToUserName = body.ToUserName;
 
     console.log('hear!!!');
-    senddata(FromUserName,ToUserName,'hello welcom yaohe dingcan',res);
+    senddata(FromUserName,ToUserName,'你说啥？' + content+ '?',res);
 
 
     // //用户点击菜单响应事件
