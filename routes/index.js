@@ -12,8 +12,8 @@ var xml2js = require('xml2js');
 var ejs = require('ejs');
 var parser = new xml2js.Parser();
 
-var User = require('user.model');
-var Order = require('order.model');
+var User = require('./user.model');
+var Order = require('./order.model');
 
 
 function processMessage(data,res){
