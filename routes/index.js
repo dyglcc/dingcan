@@ -291,9 +291,9 @@ function processMessage(data,res){
     ToUserName = body.ToUserName;
 
     console.log('hear!!!');
-    senddata(FromUserName,ToUserName,'你说啥？' + content+ '?',res);
-
-
+    if(content){
+      senddata(FromUserName,ToUserName,'你说啥？' + content+ '?',res);
+    }
     // //用户点击菜单响应事件
     // if(messageType === 'event') {
     // var eventName = body.Event[];
