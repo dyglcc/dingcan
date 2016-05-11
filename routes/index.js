@@ -88,6 +88,7 @@ var wrapTpl = ['<xml>',
   '<% } else { %>',
     '<Content><![CDATA[<%-content%>]]></Content>',
   '<% } %>',
+    '<MsgId>11112323123asdasd</MsgId>',
   '</xml>'].join('');
 var encryptWrap = ejs.compile(wrapTpl);
 // 获取用户基本信息
@@ -192,7 +193,8 @@ senddata.toname= 'gh_96f8c3ea0e5f';
 senddata.fromUsername = 'oiYTxvzLid90lCoOXldHb-mMPv7c';
 senddata.createTime = parseInt(new Date().getTime()/1000);
 senddata.msgType = "text";
-senddata.content = "content is welcom " +'';
+senddata.content = "?";
+senddata.
 // senddata.flag = 0;
 var xml = encryptWrap(senddata);
 console.log("log---send----data!" + xml);
