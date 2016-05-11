@@ -65,9 +65,10 @@ function processMessage(data,res){
               case "jianyi":
                 Order.findById(FromUserName, function (err, thing) {
                   if(err) { console.log(err); }
-                if(!thing) { console.log("not found");
-                senddata(FromUserName,ToUserName,"还没有订餐呢",res);
-                break;
+                if(!thing) { 
+                  console.log("not found");
+                  senddata(FromUserName,ToUserName,"还没有订餐呢",res);
+                  return;
                  }
                 thing.remove(function(err) {
                 if(err) { console.log(err); }
