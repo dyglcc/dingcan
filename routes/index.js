@@ -224,7 +224,7 @@ function processMessage(data,res){
 
     var type = body.MsgType;
     var eventtype = body.Event;
-    var clickkey = '';
+    // var clickkey = '';
 
     console.log('type content eventtype clickkey ' + type + ' ' + eventtype  );
 
@@ -232,8 +232,8 @@ function processMessage(data,res){
     if(type == "event"){
         if(eventtype =="CLICK"){
           console.log('switch click ' + body.EventKey);
-          clickkey = body.EventKey;
-          switch(clickKey){
+          
+          switch(body.EventKey){
               case "jiayi":
                 break;
               case "jianyi":
