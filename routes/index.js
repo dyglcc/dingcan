@@ -223,11 +223,9 @@ function processMessage(data,res){
 
 
     var type = body.MsgType;
-    var content = body.Content;
     var eventtype = body.Event;
-    var clickKey = body.EventKey;
 
-    console.log('type content eventtype clickkey ' + type +' ' + content +' ' + eventtype +' ' + clickkey );
+    // console.log('type content eventtype clickkey ' + type +' ' + content +' ' + eventtype +' ' + clickkey );
 
     switch(type){
         case "event":
@@ -235,6 +233,8 @@ function processMessage(data,res){
             case "CLICK":
             // <Event><![CDATA[CLICK]]></Event>
 // <EventKey><![CDATA[EVENTKEY]]></EventKey>
+
+    var clickKey = body.EventKey;
               console.log('switch click ' + clickkey);
               break;
             case "subscribe":
@@ -246,6 +246,8 @@ function processMessage(data,res){
         }
           break;
         case "text":
+
+    var content = body.Content;
               console.log('get text content  ' + content);
         // <MsgType><![CDATA[text]]></MsgType>
  // <Content><![CDATA[this is a test]]></Content>
