@@ -214,12 +214,13 @@ function processMessage(data,res){
     var ToUserName = "";
     parser.parseString(data.toString(), function(err, result) {
     var body = result.xml;
-    var messageType = body.MsgType[];
+    // var messageType = body.MsgType[];
     // todo ----------
 
+    console.log('messageType' + body.MsgType);
     FromUserName = body.FromUserName;
     ToUserName = body.ToUserName;
-    
+
     console.log('hear!!!');
     senddata(FromUserName,ToUserName,'hello welcom yaohe dingcan',res);
 
