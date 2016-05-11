@@ -4,12 +4,13 @@
  */
 var sha1 = require('sha1');
 var querystring = require('querystring');
-var xml = require('node-xml');
+// var xml = require('node-xml');
 var appid_ = 'wx9a4bc648a1246c04';
 var secret_ ='1692347f949b03f66829f36072ebf0b0';
 var https = require('https');
 var xml2js = require('xml2js');
 var ejs = require('ejs');
+var parse = new xml2js.Parse();
 
 
 var wrapTpl = ['<xml>',
@@ -208,102 +209,41 @@ processMessage(body,res);
 	//processMessage(body,res);
 }
 function processMessage(data,res){
-var ToUserName="";
-var FromUserName="";
-var CreateTime="";
-var MsgType="";
-var Content="";
-var Location_X="";
-var Location_Y="";
-var Scale=1;
-var Label="";
-var PicUrl="";
-var FuncFlag="";
- 
-var tempName="";
-console.log('000001' + data );
-var parse=new xml.SaxParser(function(cb){
-    cb.onStartElementNS(function(elem,attra,prefix,uri,namespaces){
-        tempName=elem;
-    });
-     
-    cb.onCharacters(function(chars){
-        chars=chars.replace(/(^\s*)|(\s*$)/g, "");
 
-        console.log('000002');
-        if(tempName=="CreateTime"){
-            CreateTime=chars;
-        }else if(tempName=="Location_X"){
-            Location_X=cdata;
-        }else if(tempName=="Location_Y"){
-            Location_Y=cdata;
-        }else if(tempName=="Scale"){
-            Scale=cdata;
-        }
-         
-         
-    });
-     
-    cb.onCdata(function(cdata){
-         
+    var FromUserName = "";
+    var ToUserName = "";
+    parser.parseString(data.toString(), function(err, result) {
+    var body = result.xml;
+    var messageType = body.MsgType[];
+    // todo ----------
 
-        console.log('000003');
-        if(tempName=="ToUserName"){
-            ToUserName=cdata;
-        }else if(tempName=="FromUserName"){
-            FromUserName=cdata;
-        }else if(tempName=="MsgType"){
-            MsgType=cdata;
-        }else if(tempName=="Content"){
-            Content=cdata;
-        }else if(tempName=="PicUrl"){
-            PicUrl=cdata;
-        }else if(tempName=="Label"){
-            Label=cdata;
-        }
-        console.log("cdata:"+cdata);
-    });
-     
-    cb.onEndElementNS(function(elem,prefix,uri){
-        tempName="";
-        console.log('000001');
-    });
-     
-    cb.onEndDocument(function(){
-        console.log("onEndDocument");
-        tempName="";
-        var date=new Date(); 
-        var yy=date.getYear(); 
-        var MM=date.getMonth() + 1; 
-        var dd=date.getDay(); 
-        var hh=date.getHours(); 
-        var mm=date.getMinutes(); 
-        var ss=date.getSeconds(); 
-        var sss=date.getMilliseconds();  
-        var result=Date.UTC(yy,MM,dd,hh,mm,ss,sss); 
-        var msg="";
-        if(MsgType=="text"){
-            msg="谢谢关注,你说的是："+Content;
-        }else if (MsgType="location"){
-            msg="你所在的位置: 经度："+Location_X+"纬度："+Location_Y;
-        }else if (MsgType="image"){
-            msg="你发的图片是："+PicUrl;
-        }
-       // messageSender.sendTextMessage(FromUserName,ToUserName,CreateTime,msg,FuncFlag,response);
-	// 分情况，subscribe,保存用户的基本信息到数据库，创建一个user表，保存openid，用户名，发送欢迎信息。
-	// 如果是text信息并且是取消那么就取消今天的订餐。
-	// 如果是event的第一个菜单信息 在今天的数据表里面创建一个订单信息
-	// 如果是显示订餐列表的event那么返回今天所有人订餐信息。以text的形式展示出来。
+    FromUserName = body.FromUserName;
+    ToUserName = body.ToUserName;
+    
+    console.log('hear!!!');
+    senddata(FromUserName,ToUserName,'hello welcom yaohe dingcan',res);
 
-console.log('hear!!!');
-senddata(FromUserName,ToUserName,'hello welcom yaohe dingcan',res);
-	
-//	gettk(FromUserName,res);
-       //res.end('hello formuser :'+FromUserName);
-    });
+
+    // //用户点击菜单响应事件
+    // if(messageType === 'event') {
+    // var eventName = body.Event[];
+    // console.log('event name ' + eventName);
+    // (EventFunction[eventName]||function(){})(body, req, res);
+    // //自动回复消息
+    // }else if(messageType === 'text') {
+    // EventFunction.responseNews(body, res);
+    // //第一次填写URL时确认接口是否有效
+    // }else {
+    // res.send(echostr);
+    // }
 });
-   // parse.parseString(data);
-}
+
+
+
+ 
+   
+});
+
 // test
 exports.test = function(req,res){
 console.log( req.query);
