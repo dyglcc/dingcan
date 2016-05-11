@@ -194,7 +194,6 @@ senddata.fromUsername = 'oiYTxvzLid90lCoOXldHb-mMPv7c';
 senddata.createTime = parseInt(new Date().getTime()/1000);
 senddata.msgType = "text";
 senddata.content = "?";
-senddata.
 // senddata.flag = 0;
 var xml = encryptWrap(senddata);
 console.log("log---send----data!" + xml);
