@@ -189,11 +189,11 @@ req.on('data', function (chunk) {
 //processMessage(body,res);
 var senddata = {};
 senddata.to= 'gh_96f8c3ea0e5f';
-senddata.from = 'oiYTxvzLid90lCoOXldHb-mMPv7c';
+senddata.fromUsername = 'oiYTxvzLid90lCoOXldHb-mMPv7c';
 senddata.time = parseInt(new Date().getTime()/1000);
-senddata.type = "text";
-senddata.cont = "content is welcom " +'';
-senddata.flag = 0;
+senddata.msgType = "text";
+senddata.content = "content is welcom " +'';
+// senddata.flag = 0;
 var xml = encryptWrap(senddata);
 console.log("log---send----data!" + xml);
 res.end(xml);
@@ -285,9 +285,9 @@ var parse=new xml.SaxParser(function(cb){
 	// 如果是显示订餐列表的event那么返回今天所有人订餐信息。以text的形式展示出来。
 console.log('hear!!!');
 var senddata = {};
-senddata.to= FromUserName;
+senddata.toUsername= FromUserName;
 senddata.from = ToUserName;
-senddata.time = parseInt(new Date().getTime()/1000);
+senddata.createTime = parseInt(new Date().getTime()/1000);
 senddata.type = "text";
 senddata.cont = "content is welcom " + FromUserName;
 senddata.flag = 0;
