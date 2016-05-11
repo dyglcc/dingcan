@@ -294,7 +294,7 @@ function processMessage(data,res){
     if(content){
       senddata(FromUserName,ToUserName,'你说啥？' + content+ '?',res);
     }else{
-      senddata(FromUserName,ToUserName,'',res);
+      senddata(FromUserName,ToUserName,"",res);
     }
     // //用户点击菜单响应事件
     // if(messageType === 'event') {
