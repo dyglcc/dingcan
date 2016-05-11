@@ -237,13 +237,8 @@ function processMessage(data,res){
     // }else {
     // res.send(echostr);
     // }
-});
-
-
-
- 
-   
-});
+});   
+}
 
 // test
 exports.test = function(req,res){
