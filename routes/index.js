@@ -224,14 +224,21 @@ function processMessage(data,res){
 
     var type = body.MsgType;
     var eventtype = body.Event;
+    var clickkey = '';
 
     console.log('type content eventtype clickkey ' + type + ' ' + eventtype  );
 
     console.log( body);
     if(type == "event"){
         if(eventtype =="CLICK"){
-          // var clickKey = ;
           console.log('switch click ' + body.EventKey);
+          clickkey = body.EventKey;
+          switch(clickKey){
+              case "jiayi":
+                break;
+              case "jianyi":
+                break;
+          }
         }else if(eventtype =="subscribe"){
 
         }else if(eventtype =="unsubscribe"){
