@@ -230,8 +230,8 @@ function processMessage(data,res){
     console.log( body);
     if(type == "event"){
         if(eventtype =="CLICK"){
-          var clickKey = body.EventKey;
-          console.log('switch click ' + clickkey);
+          // var clickKey = ;
+          console.log('switch click ' + body.EventKey);
         }else if(eventtype =="subscribe"){
 
         }else if(eventtype =="unsubscribe"){
