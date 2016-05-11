@@ -227,7 +227,7 @@ function processMessage(data,res){
 
     console.log('type content eventtype clickkey ' + type + ' ' + eventtype  );
 
-
+    console.log('body--' + body);
     if(type == "event"){
         if(eventtype =="CLICK"){
           var clickKey = body.EventKey;
