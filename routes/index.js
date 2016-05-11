@@ -13,7 +13,7 @@ var ejs = require('ejs');
 
 
 var wrapTpl = ['<xml>',
-    '<ToUserName><![CDATA[<%-toUsername%>]]></ToUserName>',
+    '<ToUserName><![CDATA[<%-toname%>]]></ToUserName>',
     '<FromUserName><![CDATA[<%-fromUsername%>]]></FromUserName>',
     '<CreateTime><%=createTime%></CreateTime>',
     '<% if (msgType === "device_event" && (Event === "subscribe_status" || Event === "unsubscribe_status")) { %>',
@@ -188,7 +188,7 @@ req.on('data', function (chunk) {
 //  co//nsole.log(jsonObj.$key);
 //processMessage(body,res);
 var senddata = {};
-senddata.to= 'gh_96f8c3ea0e5f';
+senddata.toname= 'gh_96f8c3ea0e5f';
 senddata.fromUsername = 'oiYTxvzLid90lCoOXldHb-mMPv7c';
 senddata.time = parseInt(new Date().getTime()/1000);
 senddata.msgType = "text";
