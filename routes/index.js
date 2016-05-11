@@ -235,8 +235,11 @@ function processMessage(data,res){
           
           switch(body.EventKey){
               case "jiayi":
+                console.log('switch click ' + jiayi);
                 break;
               case "jianyi":
+
+                console.log('switch click ' + jianyi);
                 break;
           }
         }else if(eventtype =="subscribe"){
