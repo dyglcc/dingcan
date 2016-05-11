@@ -217,7 +217,42 @@ function processMessage(data,res){
     // var messageType = body.MsgType[];
     // todo ----------
 
+
+
     console.log('messageType' + body.MsgType);
+
+
+    var type = body.MsgType;
+    var content = body.Content;
+    var eventtype = body.Event;
+    var clickKey = body.EventKey;
+
+    console.log('type content eventtype clickkey ' + type +' ' + content +' ' + eventtype +' ' + clickkey );
+
+    switch(type){
+        case "event":
+        switch(){
+            case "CLICK":
+            // <Event><![CDATA[CLICK]]></Event>
+// <EventKey><![CDATA[EVENTKEY]]></EventKey>
+              break;
+            case "subscribe"
+            // <MsgType><![CDATA[event]]></MsgType>
+// <Event><![CDATA[subscribe]]></Event>
+              break;
+            case "unsubscribe"
+              break;
+        }
+          break;
+        case "text":
+        // <MsgType><![CDATA[text]]></MsgType>
+ // <Content><![CDATA[this is a test]]></Content>
+          break;
+        default:
+          break;
+    }
+
+
     FromUserName = body.FromUserName;
     ToUserName = body.ToUserName;
 
@@ -258,12 +293,10 @@ exports.checkSignature= function(req,res){
 }
 function check(req){
 	var signature = req.query.signature;
-        var timestamp = req.query.timestamp;
-        var nonce = req.query.nonce;
-        var echostr = req.query.echostr;
-
-        var arrayT = [token,timestamp,nonce];
-
+  var timestamp = req.query.timestamp;
+  var nonce = req.query.nonce;
+  var echostr = req.query.echostr;
+  var arrayT = [token,timestamp,nonce];
 console.log(arrayT);
 	//console.log(req);
 	console.log(req.query);        
