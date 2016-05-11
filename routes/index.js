@@ -174,6 +174,20 @@ res.json({id:req.body});
 
 };
 
+function senddata(toname,fromuser,content,res){
+var senddata = {};
+senddata.toname= toname;
+//senddata.toname= 'oiYTxvzLid90lCoOXldHb-mMPv7c';
+// senddata.fromUsername = 'gh_96f8c3ea0e5f';
+senddata.fromUsername = fromuser;
+senddata.createTime = parseInt(new Date().getTime()/1000);
+senddata.msgType = "text";
+senddata.content = content;
+// senddata.flag = 0;
+var xml = encryptWrap(senddata);
+console.log("log---send----data!" + xml);
+res.end(xml);
+}
 exports.sub = function(req,res){
         console.log('post : sub----');
 var body = '';
@@ -186,17 +200,8 @@ req.on('data', function (chunk) {
   //console.log(params);
   //  jsonObj = JSON.parse(body);
 //  co//nsole.log(jsonObj.$key);
-//processMessage(body,res);
-var senddata = {};
-senddata.toname= 'oiYTxvzLid90lCoOXldHb-mMPv7c';
-senddata.fromUsername = 'gh_96f8c3ea0e5f';
-senddata.createTime = parseInt(new Date().getTime()/1000);
-senddata.msgType = "text";
-senddata.content = "?";
-// senddata.flag = 0;
-var xml = encryptWrap(senddata);
-console.log("log---send----data!" + xml);
-res.end(xml);
+processMessage(body,res);
+
   });
 //res.json(jsonObj);
   //res.render('index', { title: 'Expresssssssss post ssssssssssssssssss'} );
@@ -283,18 +288,9 @@ var parse=new xml.SaxParser(function(cb){
 	// 如果是text信息并且是取消那么就取消今天的订餐。
 	// 如果是event的第一个菜单信息 在今天的数据表里面创建一个订单信息
 	// 如果是显示订餐列表的event那么返回今天所有人订餐信息。以text的形式展示出来。
+
 console.log('hear!!!');
-var senddata = {};
-senddata.toUsername= FromUserName;
-senddata.from = ToUserName;
-senddata.createTime = parseInt(new Date().getTime()/1000);
-senddata.type = "text";
-senddata.cont = "content is welcom " + FromUserName;
-senddata.flag = 0;
-console.log(senddata);
-//var xml =encryptWrap(senddata); 
-console.log('xxx' + 'sdfsdf');
-	res.end("sdddddddddddddddddddddddddddddddddddd");
+senddata(FromUserName,ToUserName,'hello welcom yaohe dingcan',res);
 	
 //	gettk(FromUserName,res);
        //res.end('hello formuser :'+FromUserName);
