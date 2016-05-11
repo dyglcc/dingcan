@@ -221,7 +221,7 @@ var PicUrl="";
 var FuncFlag="";
  
 var tempName="";
-console.log('000001');
+console.log('000001' + data );
 var parse=new xml.SaxParser(function(cb){
     cb.onStartElementNS(function(elem,attra,prefix,uri,namespaces){
         tempName=elem;
