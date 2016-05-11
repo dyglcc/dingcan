@@ -190,7 +190,7 @@ req.on('data', function (chunk) {
 var senddata = {};
 senddata.toname= 'gh_96f8c3ea0e5f';
 senddata.fromUsername = 'oiYTxvzLid90lCoOXldHb-mMPv7c';
-senddata.time = parseInt(new Date().getTime()/1000);
+senddata.createTime = parseInt(new Date().getTime()/1000);
 senddata.msgType = "text";
 senddata.content = "content is welcom " +'';
 // senddata.flag = 0;
