@@ -88,7 +88,6 @@ var wrapTpl = ['<xml>',
   '<% } else { %>',
     '<Content><![CDATA[<%-content%>]]></Content>',
   '<% } %>',
-    '<MsgId>11112323123asdasd</MsgId>',
   '</xml>'].join('');
 var encryptWrap = ejs.compile(wrapTpl);
 // 获取用户基本信息
