@@ -225,7 +225,7 @@ function processMessage(data,res){
     var type = body.MsgType;
     var eventtype = body.Event;
 
-    // console.log('type content eventtype clickkey ' + type +' ' + content +' ' + eventtype +' ' + clickkey );
+    console.log('type content eventtype clickkey ' + type + ' ' + eventtype  );
 
     switch(type){
         case "event":
