@@ -2,7 +2,18 @@
 /**
  * Module dependencies.
  */
-//skdf
+
+var mongoose = require('mongoose');
+// var config = require('./config/environment');
+
+// Connect to database
+mongoose.connect('mongodb://127.0.0.1/dingcan');
+mongoose.connection.on('error', function(err) {
+  console.error('MongoDB connection error: ' + err);
+  process.exit(-1);
+  }
+);
+
 var express = require('express')
   , routes = require('./routes');
 
