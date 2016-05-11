@@ -231,10 +231,11 @@ function processMessage(data,res){
 
     switch(type){
         case "event":
-        switch(){
+        switch(eventtype){
             case "CLICK":
             // <Event><![CDATA[CLICK]]></Event>
 // <EventKey><![CDATA[EVENTKEY]]></EventKey>
+              console.log('switch click ' + clickkey);
               break;
             case "subscribe"
             // <MsgType><![CDATA[event]]></MsgType>
@@ -245,6 +246,7 @@ function processMessage(data,res){
         }
           break;
         case "text":
+              console.log('get text content  ' + content);
         // <MsgType><![CDATA[text]]></MsgType>
  // <Content><![CDATA[this is a test]]></Content>
           break;
