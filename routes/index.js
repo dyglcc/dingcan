@@ -10,7 +10,7 @@ var secret_ ='1692347f949b03f66829f36072ebf0b0';
 var https = require('https');
 var xml2js = require('xml2js');
 var ejs = require('ejs');
-var parse = new xml2js.Parse();
+var parser = new xml2js.Parser();
 
 
 var wrapTpl = ['<xml>',
