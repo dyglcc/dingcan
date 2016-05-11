@@ -237,11 +237,11 @@ function processMessage(data,res){
 // <EventKey><![CDATA[EVENTKEY]]></EventKey>
               console.log('switch click ' + clickkey);
               break;
-            case "subscribe"
+            case "subscribe":
             // <MsgType><![CDATA[event]]></MsgType>
 // <Event><![CDATA[subscribe]]></Event>
               break;
-            case "unsubscribe"
+            case "unsubscribe":
               break;
         }
           break;
