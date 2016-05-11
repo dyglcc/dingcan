@@ -221,6 +221,7 @@ var PicUrl="";
 var FuncFlag="";
  
 var tempName="";
+console.log('000001');
 var parse=new xml.SaxParser(function(cb){
     cb.onStartElementNS(function(elem,attra,prefix,uri,namespaces){
         tempName=elem;
@@ -228,6 +229,8 @@ var parse=new xml.SaxParser(function(cb){
      
     cb.onCharacters(function(chars){
         chars=chars.replace(/(^\s*)|(\s*$)/g, "");
+
+        console.log('000002');
         if(tempName=="CreateTime"){
             CreateTime=chars;
         }else if(tempName=="Location_X"){
@@ -243,6 +246,8 @@ var parse=new xml.SaxParser(function(cb){
      
     cb.onCdata(function(cdata){
          
+
+        console.log('000003');
         if(tempName=="ToUserName"){
             ToUserName=cdata;
         }else if(tempName=="FromUserName"){
@@ -261,6 +266,7 @@ var parse=new xml.SaxParser(function(cb){
      
     cb.onEndElementNS(function(elem,prefix,uri){
         tempName="";
+        console.log('000001');
     });
      
     cb.onEndDocument(function(){
