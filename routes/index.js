@@ -12,6 +12,166 @@ var xml2js = require('xml2js');
 var ejs = require('ejs');
 var parser = new xml2js.Parser();
 
+var User = require('user.model');
+var Order = require('order.model');
+
+
+function processMessage(data,res){
+
+    var FromUserName = "";
+    var ToUserName = "";
+    parser.parseString(data.toString(), function(err, result) {
+    var body = result.xml;
+    // var messageType = body.MsgType[];
+    // todo ----------
+
+    FromUserName = body.FromUserName;
+    ToUserName = body.ToUserName;
+
+
+    console.log('messageType' + body.MsgType);
+
+
+    var content = body.Content;
+    var type = body.MsgType;
+    var eventtype = body.Event;
+    // var clickkey = '';
+
+    console.log('type content eventtype clickkey ' + type + ' ' + eventtype  );
+
+    console.log( body);
+    if(type == "event"){
+        if(eventtype =="CLICK"){
+          console.log('switch click ' + body.EventKey);
+          
+          switch(body.EventKey){
+              case "jiayi":
+                console.log('switch click ' + jiayi);
+                // save mongo db 
+                Order.findOneAndUpdate({openid: FromUserName}, {$set: {openid:FromUserName,ordertime:new Date().now()}}, function (err, user) {
+                  if (err) {
+                    console.log(err);
+                    //return handleError(res, err); 
+                  } 
+                //return res.status(200).json(user);
+                });
+                
+
+                
+
+                senddata(FromUserName,ToUserName,"订餐成功",res);
+
+                break;
+              case "jianyi":
+                Order.findById(FromUserName, function (err, thing) {
+                  if(err) { console.log(err); }
+                if(!thing) { console.log("not found");
+                senddata(FromUserName,ToUserName,"还没有订餐呢",res);
+                break;
+                 }
+                thing.remove(function(err) {
+                if(err) { console.log(err); }
+                senddata(FromUserName,ToUserName,"已取消",res);
+                });
+                });
+                
+                console.log('switch click ' + jianyi);
+                break;
+          }
+        }else if(eventtype =="subscribe"){
+          gettk(FromUserName,to,FromUserName,res);
+          senddata(FromUserName,ToUserName,"欢迎使用吆喝订餐~",res);
+
+        }else if(eventtype =="unsubscribe"){
+          // todo nothing
+          senddata(FromUserName,ToUserName,"拜拜~",res);
+        }
+
+    }else if(type =="text"){
+        console.log('get text content  ' + content);
+    }
+});   
+}
+
+
+// 获取用户基本信息
+function getUserInfo(from,to,acesstk,openid_,res){
+
+console.log('start get userinfor ,token,openid' + acesstk + ' ' + openid_ )
+var data = querystring.stringify({
+        
+    access_token : acesstk,
+     openid: openid_
+});
+var options = {
+    hostname: 'api.weixin.qq.com',
+        port: 443,
+        path: '/cgi-bin/user/info?' + data,
+      method: 'GET'
+};
+//发送请求
+var req = https.request(options,function(response){
+    response.setEncoding('utf8');
+    response.on('data',function(chunk){
+        var userinfo = JSON.parse(chunk);//如果服务器传来的是json字符串，可以将字符串转换成json
+        console.log(userinfo);
+
+
+        senddata(from,to, userinfo +"欢迎使用吆喝订餐~",res);
+
+        // User.findOneAndUpdate({name: req.body.name}, {$set: req.body}, {upsert: true}, function (err, user) {
+        //         if (err) {
+        //           console.log(err);
+        //           //return handleError(res, err); 
+        //         } 
+        //         //return res.status(200).json(user);
+        // });
+    });
+});
+//如果有错误会输出错误
+req.on('error', function(e){
+     console.log('错误：' + e.message);
+});
+req.end();
+
+}
+// 获取accessToken
+ function gettk(from,to,openid,res){
+var data = querystring.stringify({
+  grant_type:'client_credential',
+    appid : appid_,
+     secret: secret_
+});
+var options = {
+    hostname: 'api.weixin.qq.com',
+        port: 443,
+        path: '/cgi-bin/token?' + data,
+      method: 'GET'
+};
+//发送请求
+var req = https.request(options,function(response){
+    response.setEncoding('utf8');
+    response.on('data',function(chunk){
+        var returnData = JSON.parse(chunk);//如果服务器传来的是json字符串，可以将字符串转换成json
+  console.log(returnData);
+
+  // get accessToken
+  var accessToken = returnData.access_token;
+  getUserInfo(from,to,accessToken,openid,res);
+//        res.json(returnData);
+//res.write('hello success ' + returnData);
+    });
+});
+//如果有错误会输出错误
+req.on('error', function(e){
+     console.log('错误：' + e.message);
+});
+req.end();
+}
+exports.index = function(req, res){
+  console.log(req);
+  res.render('index', { title: 'Express' })
+};
 
 var wrapTpl = ['<xml>',
     '<ToUserName><![CDATA[<%-toname%>]]></ToUserName>',
@@ -91,78 +251,7 @@ var wrapTpl = ['<xml>',
   '<% } %>',
   '</xml>'].join('');
 var encryptWrap = ejs.compile(wrapTpl);
-// 获取用户基本信息
-function getUserInfo(acesstk,openid_,res){
 
-console.log('start get userinfor ,token,openid' + acesstk + ' ' + openid_ )
-var data = querystring.stringify({
-        
-    access_token : acesstk,
-     openid: openid_
-});
-var options = {
-    hostname: 'api.weixin.qq.com',
-        port: 443,
-        path: '/cgi-bin/user/info?' + data,
-      method: 'GET'
-};
-//发送请求
-var req = https.request(options,function(response){
-    response.setEncoding('utf8');
-    response.on('data',function(chunk){
-        var userinfo = JSON.parse(chunk);//如果服务器传来的是json字符串，可以将字符串转换成json
-        console.log(userinfo);
-	// save userinfo
-	
-        //res.json(userinfo);
-     	//res.end("");
-//res.write('');
-    });
-});
-//如果有错误会输出错误
-req.on('error', function(e){
-     console.log('错误：' + e.message);
-});
-req.end();
-
-}
-// 获取accessToken
- function gettk(openid,res){
-var data = querystring.stringify({
-	grant_type:'client_credential',
-    appid : appid_,
-     secret: secret_
-});
-var options = {
-    hostname: 'api.weixin.qq.com',
-        port: 443,
-        path: '/cgi-bin/token?' + data,
-      method: 'GET'
-};
-//发送请求
-var req = https.request(options,function(response){
-    response.setEncoding('utf8');
-    response.on('data',function(chunk){
-        var returnData = JSON.parse(chunk);//如果服务器传来的是json字符串，可以将字符串转换成json
-	console.log(returnData);
-
-	// get accessToken
-	var accessToken = returnData.access_token;
-	getUserInfo(accessToken,openid,res);
-//        res.json(returnData);
-//res.write('hello success ' + returnData);
-    });
-});
-//如果有错误会输出错误
-req.on('error', function(e){
-     console.log('错误：' + e.message);
-});
-req.end();
-}
-exports.index = function(req, res){
-	console.log(req);
-	res.render('index', { title: 'Express' })
-};
 
 
 exports.weixin = function(req,res){
@@ -208,108 +297,7 @@ processMessage(body,res);
   //res.render('index', { title: 'Expresssssssss post ssssssssssssssssss'} );
 	//processMessage(body,res);
 }
-function processMessage(data,res){
 
-    var FromUserName = "";
-    var ToUserName = "";
-    parser.parseString(data.toString(), function(err, result) {
-    var body = result.xml;
-    // var messageType = body.MsgType[];
-    // todo ----------
-
-
-
-    console.log('messageType' + body.MsgType);
-
-
-    var content = body.Content;
-    var type = body.MsgType;
-    var eventtype = body.Event;
-    // var clickkey = '';
-
-    console.log('type content eventtype clickkey ' + type + ' ' + eventtype  );
-
-    console.log( body);
-    if(type == "event"){
-        if(eventtype =="CLICK"){
-          console.log('switch click ' + body.EventKey);
-          
-          switch(body.EventKey){
-              case "jiayi":
-                console.log('switch click ' + jiayi);
-                break;
-              case "jianyi":
-
-                console.log('switch click ' + jianyi);
-                break;
-          }
-        }else if(eventtype =="subscribe"){
-
-        }else if(eventtype =="unsubscribe"){
-
-        }
-
-    }else if(type =="text"){
-        console.log('get text content  ' + content);
-    }
-
-
-
-
-
-//     switch(type){
-//         case "event":
-//         switch(eventtype){
-//             case "CLICK":
-//             // <Event><![CDATA[CLICK]]></Event>
-// // <EventKey><![CDATA[EVENTKEY]]></EventKey>
-
-//     var clickKey = body.EventKey;
-//               console.log('switch click ' + clickkey);
-//               break;
-//             case "subscribe":
-//             // <MsgType><![CDATA[event]]></MsgType>
-// // <Event><![CDATA[subscribe]]></Event>
-//               break;
-//             case "unsubscribe":
-//               break;
-//         }
-//           break;
-//         case "text":
-
-//     var content = body.Content;
-//               console.log('get text content  ' + content);
-//         // <MsgType><![CDATA[text]]></MsgType>
-//  // <Content><![CDATA[this is a test]]></Content>
-//           break;
-//         default:
-//           break;
-//     }
-
-
-    FromUserName = body.FromUserName;
-    ToUserName = body.ToUserName;
-
-    console.log('hear!!!');
-    if(content){
-      senddata(FromUserName,ToUserName,'你说啥？' + content+ '?',res);
-    }else{
-      senddata(FromUserName,ToUserName,'',res);
-    }
-    // //用户点击菜单响应事件
-    // if(messageType === 'event') {
-    // var eventName = body.Event[];
-    // console.log('event name ' + eventName);
-    // (EventFunction[eventName]||function(){})(body, req, res);
-    // //自动回复消息
-    // }else if(messageType === 'text') {
-    // EventFunction.responseNews(body, res);
-    // //第一次填写URL时确认接口是否有效
-    // }else {
-    // res.send(echostr);
-    // }
-});   
-}
 
 // test
 exports.test = function(req,res){
