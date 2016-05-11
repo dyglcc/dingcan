@@ -227,34 +227,54 @@ function processMessage(data,res){
 
     console.log('type content eventtype clickkey ' + type + ' ' + eventtype  );
 
-    switch(type){
-        case "event":
-        switch(eventtype){
-            case "CLICK":
-            // <Event><![CDATA[CLICK]]></Event>
-// <EventKey><![CDATA[EVENTKEY]]></EventKey>
 
-    var clickKey = body.EventKey;
-              console.log('switch click ' + clickkey);
-              break;
-            case "subscribe":
-            // <MsgType><![CDATA[event]]></MsgType>
-// <Event><![CDATA[subscribe]]></Event>
-              break;
-            case "unsubscribe":
-              break;
+    if(type == "event"){
+        if(eventtype =="CLICK"){
+          var clickKey = body.EventKey;
+          console.log('switch click ' + clickkey);
+        }else if(eventtype =="subscribe"){
+
+        }else if(eventtype =="unsubscribe"){
+
         }
-          break;
-        case "text":
 
-    var content = body.Content;
-              console.log('get text content  ' + content);
-        // <MsgType><![CDATA[text]]></MsgType>
- // <Content><![CDATA[this is a test]]></Content>
-          break;
-        default:
-          break;
+    }else if(type =="text"){
+        var content = body.Content;
+        console.log('get text content  ' + content);
     }
+
+
+
+
+
+//     switch(type){
+//         case "event":
+//         switch(eventtype){
+//             case "CLICK":
+//             // <Event><![CDATA[CLICK]]></Event>
+// // <EventKey><![CDATA[EVENTKEY]]></EventKey>
+
+//     var clickKey = body.EventKey;
+//               console.log('switch click ' + clickkey);
+//               break;
+//             case "subscribe":
+//             // <MsgType><![CDATA[event]]></MsgType>
+// // <Event><![CDATA[subscribe]]></Event>
+//               break;
+//             case "unsubscribe":
+//               break;
+//         }
+//           break;
+//         case "text":
+
+//     var content = body.Content;
+//               console.log('get text content  ' + content);
+//         // <MsgType><![CDATA[text]]></MsgType>
+//  // <Content><![CDATA[this is a test]]></Content>
+//           break;
+//         default:
+//           break;
+//     }
 
 
     FromUserName = body.FromUserName;
