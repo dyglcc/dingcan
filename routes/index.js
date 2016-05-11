@@ -189,8 +189,8 @@ req.on('data', function (chunk) {
 //  co//nsole.log(jsonObj.$key);
 //processMessage(body,res);
 var senddata = {};
-senddata.toname= 'gh_96f8c3ea0e5f';
-senddata.fromUsername = 'oiYTxvzLid90lCoOXldHb-mMPv7c';
+senddata.toname= 'oiYTxvzLid90lCoOXldHb-mMPv7c';
+senddata.fromUsername = 'gh_96f8c3ea0e5f';
 senddata.createTime = parseInt(new Date().getTime()/1000);
 senddata.msgType = "text";
 senddata.content = "?";
