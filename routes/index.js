@@ -48,7 +48,7 @@ function processMessage(data,res){
               case "jiayi":
                 console.log('switch click ' + jiayi);
                 // save mongo db 
-                Order.findOneAndUpdate({openid: FromUserName}, {$set: {openid:FromUserName,ordertime:new Date().now()}}, function (err, user) {
+                Order.findOneAndUpdate({openid: 'oiYTxvzLid90lCoOXldHb-mMPv7c'}, {$set: {openid:'oiYTxvzLid90lCoOXldHb-mMPv7c',ordertime:new Date().now()}}, function (err, user) {
                   if (err) {
                     console.log(err);
                     //return handleError(res, err); 
