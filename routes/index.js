@@ -47,9 +47,9 @@ function processMessage(data,res){
           switch(body.EventKey){
               case "jiayi":
                 console.log('switch click ' + jiayi);
-                var query = {openid: FromUserName};
+                var query = {openid: body.FromUserName;};
                 console.log(query);
-                var update = {openid : FromUserName, ordertime: Date.now()};
+                var update = {openid : body.FromUserName;, ordertime: Date.now()};
                 console.log(update);
                 // save mongo db 
                 Order.findOneAndUpdate(query, {$set: update}, function (err, user) {
@@ -63,7 +63,7 @@ function processMessage(data,res){
                 console.log(user);
                 
 
-                senddata(FromUserName,ToUserName,"订餐成功",res);
+                senddata(body.FromUserName;,body.ToUserName,"订餐成功",res);
 
                 break;
               case "jianyi":
@@ -71,12 +71,12 @@ function processMessage(data,res){
                   if(err) { console.log(err); }
                 if(!thing) { 
                   console.log("not found");
-                  senddata(FromUserName,ToUserName,"还没有订餐呢",res);
+                  senddata(body.FromUserName,body.ToUserName,"还没有订餐呢",res);
                   return;
                  }
                 thing.remove(function(err) {
                 if(err) { console.log(err); }
-                senddata(FromUserName,ToUserName,"已取消",res);
+                senddata(body.FromUserName,body.ToUserName,"已取消",res);
                 });
                 });
                 
@@ -84,12 +84,12 @@ function processMessage(data,res){
                 break;
           }
         }else if(eventtype =="subscribe"){
-          gettk(FromUserName,to,FromUserName,res);
-          senddata(FromUserName,ToUserName,"欢迎使用吆喝订餐~",res);
+          gettk(body.FromUserName,to,body.FromUserName,res);
+          senddata(body.FromUserName,body.ToUserName,"欢迎使用吆喝订餐~",res);
 
         }else if(eventtype =="unsubscribe"){
           // todo nothing
-          senddata(FromUserName,ToUserName,"拜拜~",res);
+          senddata(body.FromUserName,body.ToUserName,"拜拜~",res);
         }
 
     }else if(type =="text"){
