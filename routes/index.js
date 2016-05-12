@@ -42,7 +42,7 @@ function processMessage(data,res){
     console.log( body);
     if(type == "event"){
         if(eventtype =="CLICK"){
-          console.log('switch click sssssssssss ' + body.EventKey);
+          console.log('switch click sssssssssss ' + typeof(body.EventKey));
           
           switch(body.EventKey){
               case "jiayi":
