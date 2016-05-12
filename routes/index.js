@@ -77,12 +77,13 @@ function processMessage(data,res){
               case "show_today_dingcan":
 
 // todo use 
-https://cnodejs.org/topic/508834ee65e98a980983b3d2
-                  Order.find(function (err, orders) {
-                      if(err) { return handleError(res, err); }
-                          //return res.status(200).json(things);
-
-                      });
+// https://cnodejs.org/topic/508834ee65e98a980983b3d2
+                  Order.find().populate('openid')
+                                .exec(function (err, orders) {
+                  if (err) return handleError(err);
+                    console.log(orders); // prints "The creator is Aaron"
+                    senddata(body.FromUserName,body.ToUserName,orders,res);
+                  });
 
                 break;
                 
