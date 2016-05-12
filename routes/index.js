@@ -48,9 +48,9 @@ function processMessage(data,res){
           switch(body.EventKey.toString()){
               case "jiayi":
                 // console.log('switch click ' + jiayi);
-                var query = {openid:body.FromUserName};
+                var query = {openid:body.FromUserName.toString()};
                 console.log(query);
-                var update = {openid : body.FromUserName, ordertime: Date.now()};
+                var update = {openid : body.FromUserName.toString(), ordertime: Date.now()};
                 console.log(update);
                 // save mongo db 
                 Order.findOneAndUpdate(query, {$set: update}, function (err, user) {
