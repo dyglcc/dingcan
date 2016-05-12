@@ -73,19 +73,19 @@ function processMessage(data,res){
                       }
                       senddata(body.FromUserName,body.ToUserName,"已取消",res);
                   });
-                // Order.findById(FromUserName, function (err, orders) {
-                //   if(err) { console.log(err); }
-                // if(!orders) { 
-                //   console.log("not found");
-                //   senddata(body.FromUserName,body.ToUserName,"还没有订餐呢",res);
-                //   return;
-                //  }
-                // orders.remove(function(err) {
-                // if(err) { console.log(err); }
-                // senddata(body.FromUserName,body.ToUserName,"已取消",res);
-                // });
-                // });
                 break;
+              case "show_today_dingcan":
+
+// todo use 
+https://cnodejs.org/topic/508834ee65e98a980983b3d2
+                  Order.find(function (err, orders) {
+                      if(err) { return handleError(res, err); }
+                          //return res.status(200).json(things);
+
+                      });
+
+                break;
+                
           }
         }else if(eventtype =="subscribe"){
           gettk(body.FromUserName,to,body.FromUserName,res);
