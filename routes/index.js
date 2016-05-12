@@ -58,7 +58,7 @@ function processMessage(data,res){
                     console.log(err);
                     //return handleError(res, err); 
                   } 
-                  console.log(user);
+                  console.log('sdfff' +user);
                 //return res.status(200).json(user);
                 });
 
