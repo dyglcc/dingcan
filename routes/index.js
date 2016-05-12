@@ -80,7 +80,9 @@ function processMessage(data,res){
 // https://cnodejs.org/topic/508834ee65e98a980983b3d2
                   Order.find().populate('openid')
                                 .exec(function (err, orders) {
-                  if (err) return handleError(err);
+                  if (err) {console.log('error %s ' + err.toString());
+                    senddata(body.FromUserName,body.ToUserName,'orders show error',res);};
+
                     console.log(orders); // prints "The creator is Aaron"
                     senddata(body.FromUserName,body.ToUserName,orders,res);
                   });
