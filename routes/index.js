@@ -66,7 +66,7 @@ function processMessage(data,res){
 
                 break;
               case "jianyi":
-                Order.findById(FromUserName, function (err, thing) {
+                Order.findById(FromUserName, function (err, orders) {
                   if(err) { console.log(err); }
                 if(!thing) { 
                   console.log("not found");
@@ -78,8 +78,6 @@ function processMessage(data,res){
                 senddata(body.FromUserName,body.ToUserName,"已取消",res);
                 });
                 });
-                
-                console.log('switch click ' + jianyi);
                 break;
           }
         }else if(eventtype =="subscribe"){
