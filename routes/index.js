@@ -68,12 +68,12 @@ function processMessage(data,res){
               case "jianyi":
                 Order.findById(FromUserName, function (err, orders) {
                   if(err) { console.log(err); }
-                if(!thing) { 
+                if(!orders) { 
                   console.log("not found");
                   senddata(body.FromUserName,body.ToUserName,"还没有订餐呢",res);
                   return;
                  }
-                thing.remove(function(err) {
+                orders.remove(function(err) {
                 if(err) { console.log(err); }
                 senddata(body.FromUserName,body.ToUserName,"已取消",res);
                 });
