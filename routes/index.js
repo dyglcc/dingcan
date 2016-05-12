@@ -66,18 +66,25 @@ function processMessage(data,res){
 
                 break;
               case "jianyi":
-                Order.findById(FromUserName, function (err, orders) {
-                  if(err) { console.log(err); }
-                if(!orders) { 
-                  console.log("not found");
-                  senddata(body.FromUserName,body.ToUserName,"还没有订餐呢",res);
-                  return;
-                 }
-                orders.remove(function(err) {
-                if(err) { console.log(err); }
-                senddata(body.FromUserName,body.ToUserName,"已取消",res);
-                });
-                });
+
+                  Order.findOneAndRemove({openid:FromUserName},function(err){
+                      if(err){
+                        console.log(err);
+                      }
+                      senddata(body.FromUserName,body.ToUserName,"已取消",res);
+                  });
+                // Order.findById(FromUserName, function (err, orders) {
+                //   if(err) { console.log(err); }
+                // if(!orders) { 
+                //   console.log("not found");
+                //   senddata(body.FromUserName,body.ToUserName,"还没有订餐呢",res);
+                //   return;
+                //  }
+                // orders.remove(function(err) {
+                // if(err) { console.log(err); }
+                // senddata(body.FromUserName,body.ToUserName,"已取消",res);
+                // });
+                // });
                 break;
           }
         }else if(eventtype =="subscribe"){
