@@ -47,8 +47,12 @@ function processMessage(data,res){
           switch(body.EventKey){
               case "jiayi":
                 console.log('switch click ' + jiayi);
+                var query = {openid: FromUserName};
+                console.log(query);
+                var update = {openid : FromUserName, ordertime: Date.now()};
+                console.log(update);
                 // save mongo db 
-                Order.findOneAndUpdate({openid: FromUserName}, {openid : FromUserName, ordertime: Date.now()}, function (err, user) {
+                Order.findOneAndUpdate(query, {$set: update}, function (err, user) {
                   if (err) {
                     console.log(err);
                     //return handleError(res, err); 
@@ -56,7 +60,7 @@ function processMessage(data,res){
                 //return res.status(200).json(user);
                 });
                 
-
+                console.log(user);
                 
 
                 senddata(FromUserName,ToUserName,"订餐成功",res);
