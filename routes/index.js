@@ -43,10 +43,11 @@ function processMessage(data,res){
     if(type == "event"){
         if(eventtype =="CLICK"){
           console.log('switch click sssssssssss ' + typeof(body.EventKey));
+          String
           
-          switch(""+body.EventKey+""){
+          switch(body.EventKey.toString()){
               case "jiayi":
-                console.log('switch click ' + jiayi);
+                // console.log('switch click ' + jiayi);
                 var query = {'openid':'sdssssssssssssssssss'};
                 console.log(query);
                 var update = {openid : body.FromUserName, ordertime: Date.now()};
