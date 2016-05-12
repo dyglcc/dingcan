@@ -58,11 +58,9 @@ function processMessage(data,res){
                     console.log(err);
                     //return handleError(res, err); 
                   } 
+                  console.log(user);
                 //return res.status(200).json(user);
                 });
-                
-                console.log(user);
-                
 
                 senddata(body.FromUserName,body.ToUserName,"订餐成功",res);
 
