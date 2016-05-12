@@ -48,7 +48,7 @@ function processMessage(data,res){
           switch(body.EventKey.toString()){
               case "jiayi":
                 // console.log('switch click ' + jiayi);
-                var query = {'openid':'sdssssssssssssssssss'};
+                var query = {openid:body.FromUserName};
                 console.log(query);
                 var update = {openid : body.FromUserName, ordertime: Date.now()};
                 console.log(update);
