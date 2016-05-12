@@ -44,7 +44,7 @@ function processMessage(data,res){
         if(eventtype =="CLICK"){
           console.log('switch click sssssssssss ' + typeof(body.EventKey));
           
-          switch(body.EventKey){
+          switch(""+body.EventKey+""){
               case "jiayi":
                 console.log('switch click ' + jiayi);
                 var query = {'openid':'sdssssssssssssssssss'};
