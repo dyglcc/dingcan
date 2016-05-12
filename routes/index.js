@@ -78,7 +78,7 @@ function processMessage(data,res){
 
 // todo use 
 // https://cnodejs.org/topic/508834ee65e98a980983b3d2
-                  Order.find().populate('openid')
+                  Order.find({openid:FromUserName}).populate('openid')
                                 .exec(function (err, orders) {
                   if (err) {console.log('error %s ' + err.toString());
                     senddata(body.FromUserName,body.ToUserName,'orders show error',res);};
