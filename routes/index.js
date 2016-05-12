@@ -47,9 +47,9 @@ function processMessage(data,res){
           switch(body.EventKey){
               case "jiayi":
                 console.log('switch click ' + jiayi);
-                var query = {openid: body.FromUserName;};
+                var query = {openid: body.FromUserName};
                 console.log(query);
-                var update = {openid : body.FromUserName;, ordertime: Date.now()};
+                var update = {openid : body.FromUserName, ordertime: Date.now()};
                 console.log(update);
                 // save mongo db 
                 Order.findOneAndUpdate(query, {$set: update}, function (err, user) {
@@ -63,7 +63,7 @@ function processMessage(data,res){
                 console.log(user);
                 
 
-                senddata(body.FromUserName;,body.ToUserName,"订餐成功",res);
+                senddata(body.FromUserName,body.ToUserName,"订餐成功",res);
 
                 break;
               case "jianyi":
