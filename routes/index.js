@@ -53,7 +53,7 @@ function processMessage(data,res){
                 var update = {openid : body.FromUserName.toString(), ordertime: Date.now()};
                 console.log(update);
                 // save mongo db 
-                Order.findOneAndUpdate(query.toString(), {$set: update.toString()}, function (err, user) {
+                Order.findOneAndUpdate(query, update, function (err, user) {
                   if (err) {
                     console.log(err);
                     //return handleError(res, err); 
