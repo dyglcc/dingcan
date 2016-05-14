@@ -89,7 +89,7 @@ function processMessage(data,res){
                   console.log(orders.length+'   ' + orders[0].openid);
                   var arr = new Array();
 
-                  for(var i=0;i<orders.length;i++){
+                  for(int i=0;i<orders.length;i++){
                     console.log(' set order :' + arr.length + ' i value '+ i);
 
                     User.findOne({openid:orders[i].openid},function(error,user){
@@ -98,6 +98,8 @@ function processMessage(data,res){
                         }
                         console.log('xxxxxxxxx man ' + user.name);
                         arr[i]=user.name;
+
+                        // console.log(typeof(orders.length-1));
                         if(i==orders.length-1){
                             // console.log(arr.join("ssssssssssssssss"));
                             // console.log('arr length :' + arr.length);
