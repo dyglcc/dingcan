@@ -70,22 +70,36 @@ function processMessage(data,res){
                   Order.findOneAndRemove({openid:FromUserName},function(err){
                       if(err){
                         console.log(err);
-                      }
+                      };
                       senddata(body.FromUserName,body.ToUserName,"已取消",res);
                   });
                 break;
               case "show_today_dingcan":
-
+// http://chenzhou123520.iteye.com/blog/1637397
 // todo use 
 // https://cnodejs.org/topic/508834ee65e98a980983b3d2
-                  Order.find({openid:FromUserName}).populate('openid')
-                                .exec(function (err, orders) {
-                  if (err) {console.log('error %s ' + err.toString());
-                    senddata(body.FromUserName,body.ToUserName,'orders show error',res);};
+                // 查表order；
+                var resultJson = [];
 
-                    console.log(orders); // prints "The creator is Aaron"
-                    senddata(body.FromUserName,body.ToUserName,orders,res);
-                  });
+                Order.find(function (err,orders){
+                  if(err){
+                     content.log.('表查询出错')；
+                  };
+
+                  for(var i=0;i<orders.length;i++){
+                    User.find({openid:order.openid},function(error,user){
+                        if(error){
+                          console.log("error search user");
+                        }
+                        resultJson[i] = user.name;
+
+                    });
+                  };
+
+                })；
+
+                senddata(body.FromUserName,body.ToUserName,resultJson.join(',\n')+ '总共'+resultJson.length +'人订餐',res);
+                
 
                 break;
                 
@@ -129,7 +143,21 @@ var req = https.request(options,function(response){
         console.log(userinfo);
 
 
-        senddata(from,to, userinfo +"欢迎使用吆喝订餐~",res);
+        var query = {openid:openid_};
+                console.log(query);
+                var update = {openid : body.FromUserName.toString(), userinfo.name;};
+                console.log(update);
+        Order.findOneAndUpdate(query, {$set : update},{upsert: true}, function (err, user) {
+                  if (err) {
+                    console.log(err);
+                    //return handleError(res, err); 
+                  } 
+                  console.log('sdfff' +user);
+
+                  senddata(from,to, "欢迎"+user.name+"使用吆喝订餐~",res);
+                //return res.status(200).json(user);
+                });
+
 
         // User.findOneAndUpdate({name: req.body.name}, {$set: req.body}, {upsert: true}, function (err, user) {
         //         if (err) {
