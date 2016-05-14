@@ -89,7 +89,7 @@ function processMessage(data,res){
                   console.log(orders.length+'   ' + orders[0].openid);
                   var arr = new Array();
 
-                  for(int i=0;i<orders.length;i++){
+                  for(var i=0;i<orders.length;i++){
                     console.log(' set order :' + arr.length + ' i value '+ i);
 
                     User.findOne({openid:orders[i].openid},function(error,user){
