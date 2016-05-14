@@ -86,7 +86,11 @@ function processMessage(data,res){
                     console.log("error find orders");
                   };
 
-                  console.log(orders.length+'   ' + orders[0].openid);
+                  if(orders.length ==0){
+                    senddata(body.FromUserName,body.ToUserName, '没有人订餐~',res);
+                    
+                  }
+                  // console.log(orders.length+'   ' + orders[0].openid);
                   var arr = new Array();
 
                   for(var i=0;i<orders.length;i++){
