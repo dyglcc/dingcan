@@ -15,6 +15,8 @@ var parser = new xml2js.Parser();
 var User = require('./user.model');
 var Order = require('./order.model');
 
+var moment = require('moment');
+
 
 function processMessage(data,res){
 
@@ -80,15 +82,22 @@ function processMessage(data,res){
 // https://cnodejs.org/topic/508834ee65e98a980983b3d2
                 // 查表order；
                 
+// var date1 = moment().unix();
+//   var date2 = moment(Date.now()).unix();
+//   var dateStart = moment({hour: 0, minute: 0, seconds: 0}).unix();
+//   // console.log(date1);
+//   // var x = ;
+//   console.log(date2 - date);
 
-                Order.find(function (err,orders){
+
+                Order.find({moment(ordertime).unix():{$gte:dateStart}},function (err,orders){
                   if(err){
                     console.log("error find orders");
                   };
 
                   if(orders.length ==0){
                     senddata(body.FromUserName,body.ToUserName, '没有人订餐~',res);
-                    
+
                   }
                   // console.log(orders.length+'   ' + orders[0].openid);
                   var arr = new Array();
