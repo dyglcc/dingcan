@@ -99,7 +99,8 @@ function processMessage(data,res){
                         console.log('xxxxxxxxx man ' + user.name);
                         arr[i]=user.name;
                         if(i==orders.length-1){
-                            console.log(arr.join("ssssssssssssssss"));
+                            // console.log(arr.join("ssssssssssssssss"));
+                            console.log('arr length :' + arr.length);
                             var content = arr.join(',');
                             senddata(body.FromUserName,body.ToUserName,content+ '总共'+arr.length +'人订餐',res);
                         }
