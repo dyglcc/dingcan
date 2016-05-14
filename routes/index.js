@@ -112,7 +112,15 @@ function processMessage(data,res){
 
         }else if(eventtype =="unsubscribe"){
           // todo nothing
-          senddata(body.FromUserName,body.ToUserName,"拜拜~",res);
+
+          User.findOneAndRemove({openid:FromUserName},function(err){
+                      if(err){
+                        console.log(err);
+                      };
+                      // senddata(body.FromUserName,body.ToUserName,"已取消",res);
+                      console.log('取消关注 &&'+FromUserName);
+                  });
+          //senddata(body.FromUserName,body.ToUserName,"拜拜~",res);
         }
 
     }else if(type =="text"){
