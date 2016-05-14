@@ -83,11 +83,11 @@ function processMessage(data,res){
                 // 查表order；
                 
 // var date1 = moment().unix();
-//   var date2 = moment(Date.now()).unix();
-//   var dateStart = moment({hour: 0, minute: 0, seconds: 0}).unix();
+  var date2 = moment(Date.now()).unix();
+  var dateStart = moment({hour: 0, minute: 0, seconds: 0}).unix();
 //   // console.log(date1);
 //   // var x = ;
-//   console.log(date2 - date);
+  console.log(date2 - date);
 
 
                 Order.find({moment(ordertime).unix():{$gte:dateStart}},function (err,orders){
