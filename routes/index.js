@@ -100,8 +100,8 @@ function processMessage(data,res){
                         arr[i]=user.name;
 
                         var value = orders.length-1;
-                        console.log(typeof(value));
-                        console.log(typeof(i));
+                        console.log(typeof(value) + ' value' + value);
+                        console.log(typeof(i) +' ' + i);
                         if(i==((orders.length)-1)){
                             // console.log(arr.join("ssssssssssssssss"));
                             // console.log('arr length :' + arr.length);
