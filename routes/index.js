@@ -99,11 +99,9 @@ function processMessage(data,res){
 
                     });
                   };
-
+                  senddata(body.FromUserName,body.ToUserName,resultJson.join(',\n')+ '总共'+resultJson.length +'人订餐',res);
+                  console.log(resultJson.toString());
                 });
-
-                senddata(body.FromUserName,body.ToUserName,resultJson.join(',\n')+ '总共'+resultJson.length +'人订餐',res);
-                
 
                 break;
                 
