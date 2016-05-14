@@ -157,7 +157,7 @@ var req = https.request(options,function(response){
                 console.log(query);
                 var update = {openid : userinfo.openid, name:userinfo.nickname};
                 console.log(update);
-        Order.findOneAndUpdate(query, {$set : update},{upsert: true}, function (err, user) {
+        User.findOneAndUpdate(query, {$set : update},{upsert: true}, function (err, user) {
                   if (err) {
                     console.log(err);
                     //return handleError(res, err); 
