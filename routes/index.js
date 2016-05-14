@@ -90,18 +90,19 @@ function processMessage(data,res){
                   var arr = new Array();
 
                   for(var i=0;i<orders.length;i++){
-                    console.log('orders set order :' +orders[i].openid);
+                    console.log(' set order :' + arr.length + ' i value '+ i);
+
                     User.findOne({openid:orders[i].openid},function(error,user){
                         if(error){
                           console.log("error search user");
                         }
                         console.log('xxxxxxxxx man ' + user.name);
                         arr[i]=user.name;
-                        // if(i==orders.length-1){
-                        // console.log(arr.join("ssssssssssssssss"));
-                        var content = arr.join(',');
-                        senddata(body.FromUserName,body.ToUserName,content+ '总共'+arr.length +'人订餐',res);
-                        // }
+                        if(i==orders.length-1){
+                            console.log(arr.join("ssssssssssssssss"));
+                            var content = arr.join(',');
+                            senddata(body.FromUserName,body.ToUserName,content+ '总共'+arr.length +'人订餐',res);
+                        }
                     });
                   };
                 });
