@@ -95,11 +95,12 @@ function processMessage(data,res){
                           console.log("error search user");
                         }
                         console.log('xxxxxxxxx man ' + user.name);
-                        resultJson[i] = user.name;
+                        resultJson.push(user.name);
+
 
                     });
                   };
-                  console.log('reslultJson' + resultJson.toString());
+                  console.log(resultJson);
                   senddata(body.FromUserName,body.ToUserName,resultJson.join(',\n')+ '总共'+resultJson.length +'人订餐',res);
                 });
 
