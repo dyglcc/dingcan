@@ -90,7 +90,7 @@ function processMessage(data,res){
 
                   for(var i=0;i<orders.length;i++){
                     console.log('orders set order :' +orders[i].openid);
-                    User.find({openid:orders[i].openid},function(error,user){
+                    User.findOne({openid:orders[i].openid},function(error,user){
                         if(error){
                           console.log("error search user");
                         }
