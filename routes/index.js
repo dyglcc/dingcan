@@ -98,8 +98,9 @@ function processMessage(data,res){
                         console.log('xxxxxxxxx man ' + user.name);
                         arr[i]=user.name;
                         // if(i==orders.length-1){
-                        console.log(arr.join("ssssssssssssssss"));
-                          // senddata(body.FromUserName,body.ToUserName,resultJson.join(',\n')+ '总共'+resultJson.length +'人订餐',res);
+                        // console.log(arr.join("ssssssssssssssss"));
+                        var content = arr.join(',');
+                        senddata(body.FromUserName,body.ToUserName,content+ '总共'+resultJson.length +'人订餐',res);
                         // }
                     });
                   };
