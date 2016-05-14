@@ -90,7 +90,7 @@ function processMessage(data,res){
   console.log(date2 - dateStart);
 
 
-                Order.find({ordertime:{$gte:dateStart}},function (err,orders){
+                Order.find({ordertime:{$lt:dateStart}},function (err,orders){
                   if(err){
                     console.log("error find orders");
                   };
