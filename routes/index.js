@@ -86,7 +86,7 @@ function processMessage(data,res){
                     console.log("error find orders");
                   };
 
-                  console.log(resultJson.join(''));
+                  console.log(orders);
 
                   for(var i=0;i<orders.length;i++){
                     User.find({openid:order.openid},function(error,user){
