@@ -79,7 +79,7 @@ function processMessage(data,res){
 // todo use 
 // https://cnodejs.org/topic/508834ee65e98a980983b3d2
                 // 查表order；
-                var resultJson = new Array();
+                
 
                 Order.find(function (err,orders){
                   if(err){
@@ -87,6 +87,7 @@ function processMessage(data,res){
                   };
 
                   console.log(orders.length+'   ' + orders[0].openid);
+                  var arr = new Array();
 
                   for(var i=0;i<orders.length;i++){
                     console.log('orders set order :' +orders[i].openid);
@@ -95,9 +96,9 @@ function processMessage(data,res){
                           console.log("error search user");
                         }
                         console.log('xxxxxxxxx man ' + user.name);
-                        // resultJson[i]=user.name;
+                        arr[i]=user.name;
                         // if(i==orders.length-1){
-                          console.log(resultJson);
+                        console.log(arr.join("ssssssssssssssss"));
                           // senddata(body.FromUserName,body.ToUserName,resultJson.join(',\n')+ '总共'+resultJson.length +'人订餐',res);
                         // }
                     });
