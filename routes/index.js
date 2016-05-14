@@ -100,7 +100,7 @@ function processMessage(data,res){
                         // if(i==orders.length-1){
                         // console.log(arr.join("ssssssssssssssss"));
                         var content = arr.join(',');
-                        senddata(body.FromUserName,body.ToUserName,content+ '总共'+resultJson.length +'人订餐',res);
+                        senddata(body.FromUserName,body.ToUserName,content+ '总共'+arr.length +'人订餐',res);
                         // }
                     });
                   };
