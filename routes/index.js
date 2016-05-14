@@ -99,8 +99,8 @@ function processMessage(data,res){
 
                     });
                   };
+                  console.log('reslultJson' + resultJson.toString());
                   senddata(body.FromUserName,body.ToUserName,resultJson.join(',\n')+ '总共'+resultJson.length +'人订餐',res);
-                  console.log(resultJson.toString());
                 });
 
                 break;
