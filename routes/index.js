@@ -96,7 +96,7 @@ function processMessage(data,res){
                         if(error){
                           console.log("error search user");
                         }
-                        console.log('xxxxxxxxx man ' + user.name);
+                        console.log('xxxxxxxxx man ' + user.name + ' i value  ' + i);
                         arr[i]=user.name;
 
                         var value = orders.length-1;
