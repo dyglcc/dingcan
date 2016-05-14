@@ -95,11 +95,11 @@ function processMessage(data,res){
                           console.log("error search user");
                         }
                         console.log('xxxxxxxxx man ' + user.name);
-                        resultJson[i]=user.name;
-                        if(i==orders.length-1){
+                        // resultJson[i]=user.name;
+                        // if(i==orders.length-1){
                           console.log(resultJson);
-                          senddata(body.FromUserName,body.ToUserName,resultJson.join(',\n')+ '总共'+resultJson.length +'人订餐',res);
-                        }
+                          // senddata(body.FromUserName,body.ToUserName,resultJson.join(',\n')+ '总共'+resultJson.length +'人订餐',res);
+                        // }
                     });
                   };
                 });
