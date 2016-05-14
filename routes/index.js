@@ -107,8 +107,8 @@ function processMessage(data,res){
                 
           }
         }else if(eventtype =="subscribe"){
-          gettk(body.FromUserName,to,body.FromUserName,res);
-          senddata(body.FromUserName,body.ToUserName,"欢迎使用吆喝订餐~",res);
+          gettk(body.FromUserName,body.ToUserName,body.FromUserName,res);
+          // senddata(body.FromUserName,body.ToUserName,"欢迎使用吆喝订餐~",res);
 
         }else if(eventtype =="unsubscribe"){
           // todo nothing
