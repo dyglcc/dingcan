@@ -120,7 +120,7 @@ function processMessage(data,res){
                       // senddata(body.FromUserName,body.ToUserName,"已取消",res);
                       console.log('取消关注 &&'+FromUserName);
                   });
-          //senddata(body.FromUserName,body.ToUserName,"拜拜~",res);
+          senddata(body.FromUserName,body.ToUserName,"",res);
         }
 
     }else if(type =="text"){
@@ -154,19 +154,19 @@ var req = https.request(options,function(response){
 
 
         var query = {openid:openid_};
-                console.log(query);
-                var update = {openid : userinfo.openid, name:userinfo.nickname};
-                console.log(update);
+        console.log(query);
+        var update = {openid : userinfo.openid, name:userinfo.nickname};
+        console.log(update);
         User.findOneAndUpdate(query, {$set : update},{upsert: true}, function (err, user) {
-                  if (err) {
-                    console.log(err);
-                    //return handleError(res, err); 
-                  } 
-                  console.log('sdfff' +user);
+        if (err) {
+          console.log(err);
+          //return handleError(res, err); 
+        } 
+       // console.log('sdfff' + user);
 
-                  senddata(from,to, "欢迎"+user.name+"使用吆喝订餐~",res);
-                //return res.status(200).json(user);
-                });
+        senddata(from,to, "欢迎"+userinfo.nickname+"使用吆喝订餐~",res);
+      //return res.status(200).json(user);
+      });
 
 
         // User.findOneAndUpdate({name: req.body.name}, {$set: req.body}, {upsert: true}, function (err, user) {
