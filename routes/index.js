@@ -100,7 +100,8 @@ function processMessage(data,res){
                         console.log('xxxxxxxxx man ' + user.name + ' i value  ' + i);
                         arr[i]=user.name;
                         if(i==orders.length-1){
-                            senddata(body.FromUserName,body.ToUserName, '总共'+arr.length +'人订餐',res);
+
+                            senddata(body.FromUserName,body.ToUserName, arr.join('\n')+'总共'+arr.length +'人订餐',res);
                         }
                     });
                     })(orders[i].openid, i);
