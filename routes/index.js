@@ -79,7 +79,7 @@ function processMessage(data,res){
 // todo use 
 // https://cnodejs.org/topic/508834ee65e98a980983b3d2
                 // 查表order；
-                var resultJson = [];
+                var resultJson = new Array();
 
                 Order.find(function (err,orders){
                   if(err){
