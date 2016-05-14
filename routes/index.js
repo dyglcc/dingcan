@@ -102,7 +102,7 @@ function processMessage(data,res){
                         var value = orders.length-1;
                         console.log(typeof(value));
                         console.log(typeof(i));
-                        if(i==（orders.length）-1){
+                        if(i==(orders.length)-1){
                             // console.log(arr.join("ssssssssssssssss"));
                             // console.log('arr length :' + arr.length);
                             // var content = arr.join(',');
