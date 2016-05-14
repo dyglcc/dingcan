@@ -107,6 +107,8 @@ function processMessage(data,res){
                             // console.log('arr length :' + arr.length);
                             // var content = arr.join(',');
                             senddata(body.FromUserName,body.ToUserName, '总共'+arr.length +'人订餐',res);
+                        }else{
+                            senddata(body.FromUserName,body.ToUserName, '不相等',res);
                         }
                     });
                   };
