@@ -83,7 +83,7 @@ function processMessage(data,res){
 
                 Order.find(function (err,orders){
                   if(err){
-                     content.log('表查询出错')；
+                     console.log('表查询出错')；
                   };
 
                   for(var i=0;i<orders.length;i++){
