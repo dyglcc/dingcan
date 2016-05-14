@@ -79,7 +79,7 @@ function processMessage(data,res){
 // todo use 
 // https://cnodejs.org/topic/508834ee65e98a980983b3d2
                 // 查表order；
-                var resultJson = new Array();
+                var resultJson = [];
 
                 Order.find(function (err,orders){
                   if(err){
@@ -94,7 +94,7 @@ function processMessage(data,res){
                         if(error){
                           console.log("error search user");
                         }
-                        console.log('xxxxxxxxx man ' + user)
+                        console.log('xxxxxxxxx man ' + user.name);
                         resultJson[i] = user.name;
 
                     });
