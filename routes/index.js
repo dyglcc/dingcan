@@ -92,25 +92,18 @@ function processMessage(data,res){
                   for(var i=0;i<orders.length;i++){
                     console.log(' set order :' + arr.length + ' i value '+ i);
 
-                    User.findOne({openid:orders[i].openid},function(error,user){
+                    (function(id, i){
+                        User.findOne({openid:id},function(error,user){
                         if(error){
                           console.log("error search user");
                         }
                         console.log('xxxxxxxxx man ' + user.name + ' i value  ' + i);
                         arr[i]=user.name;
-
-                        var value = orders.length-1;
-                        console.log(typeof(value) + ' value' + value);
-                        console.log(typeof(i) +' ' + i);
-                        if(i==((orders.length)-1)){
-                            // console.log(arr.join("ssssssssssssssss"));
-                            // console.log('arr length :' + arr.length);
-                            // var content = arr.join(',');
+                        if(i==orders.length-1){
                             senddata(body.FromUserName,body.ToUserName, '总共'+arr.length +'人订餐',res);
-                        }else{
-                            senddata(body.FromUserName,body.ToUserName, '不相等',res);
                         }
                     });
+                    })(orders[i].openid, i);
                   };
                 });
 
