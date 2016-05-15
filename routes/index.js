@@ -83,11 +83,11 @@ function processMessage(data,res){
                 // 查表order；
                 
 // var date1 = moment().unix();
-  var date2 = moment(Date.now()).unix();
-  var dateStart = moment({hour: 0, minute: 0, seconds: 0}).unix();
+  var date2 = moment(Date.now());
+  var dateStart = moment({hour: 0, minute: 0, seconds: 0});
 //   // console.log(date1);
 //   // var x = ;
-  console.log(date2 - dateStart);
+  console.log(date2);
   console.log(dateStart);
 
 
