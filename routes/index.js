@@ -87,8 +87,8 @@ function processMessage(data,res){
   var dateStart = moment({hour: 0, minute: 0, seconds: 0});
 //   // console.log(date1);
 //   // var x = ;
-  console.log(date2);
-  console.log(dateStart);
+  console.log(date2-dateStart);
+  // console.log(dateStart);
 
 
                 Order.find({ordertime:{$gte:dateStart}},function (err,orders){
