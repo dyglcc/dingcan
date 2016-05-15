@@ -88,6 +88,7 @@ function processMessage(data,res){
 //   // console.log(date1);
 //   // var x = ;
   console.log(date2 - dateStart);
+  console.log(dateStart);
 
 
                 Order.find({ordertime:{$gte:dateStart}},function (err,orders){
@@ -104,6 +105,9 @@ function processMessage(data,res){
 
                   for(var i=0;i<orders.length;i++){
                     console.log(' set order :' + arr.length + ' i value '+ i);
+
+                    var testdate = moment(orders[i].ordertime).unix();
+                    console.log('order time :' +testdate);
 
                     (function(id, i){
                         User.findOne({openid:id},function(error,user){
